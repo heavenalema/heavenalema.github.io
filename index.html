@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Heaven Alema — Architecture & Design</title>
+
+  <meta name="description" content="Heaven Alema — Architecture, design, visualization and research.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f6f2;
+      color: #171717;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, 90%);
+      margin: auto;
+    }
+
+    /* NAVIGATION */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247,246,242,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #deddd8;
+    }
+
+    .nav-inner {
+      min-height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      font-size: 13px;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.55;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #deddd8;
+    }
+
+    .hero-content {
+      padding: 90px 0;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+      color: #666;
+    }
+
+    .hero h1 {
+      max-width: 900px;
+      font-size: clamp(48px, 8vw, 105px);
+      line-height: 0.94;
+      letter-spacing: -5px;
+      font-weight: 500;
+    }
+
+    .hero-description {
+      max-width: 580px;
+      margin-top: 42px;
+      font-size: 17px;
+      color: #555;
+    }
+
+    .hero-link {
+      display: inline-block;
+      margin-top: 35px;
+      border-bottom: 1px solid #171717;
+      padding-bottom: 5px;
+      font-size: 14px;
+    }
+
+    /* SECTION */
+
+    section {
+      padding: 120px 0;
+      border-bottom: 1px solid #deddd8;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #777;
+      margin-bottom: 45px;
+    }
+
+    /* ABOUT */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+    }
+
+    .about-title {
+      font-size: 40px;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .about-text {
+      max-width: 680px;
+      font-size: 20px;
+      color: #444;
+    }
+
+    .about-text p + p {
+      margin-top: 25px;
+    }
+
+    /* WORK */
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 60px 35px;
+    }
+
+    .project {
+      cursor: pointer;
+    }
+
+    .project-image {
+      height: 500px;
+      background: #deddd8;
+      display: flex;
+      align-items: flex-end;
+      padding: 25px;
+      transition: transform 0.4s ease;
+      overflow: hidden;
+    }
+
+    .project:hover .project-image {
+      transform: scale(0.985);
+    }
+
+    .project-number {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    .project-title {
+      font-size: 25px;
+      letter-spacing: -1px;
+      margin-bottom: 7px;
+    }
+
+    .project-type {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* PROJECT VISUALS */
+
+    .project-one {
+      background:
+        linear-gradient(135deg, #d8d3c8 0%, #b9b3a7 48%, #8d8a80 100%);
+    }
+
+    .project-two {
+      background:
+        linear-gradient(135deg, #c9d0c1 0%, #87977c 55%, #53624e 100%);
+    }
+
+    .project-three {
+      background:
+        linear-gradient(135deg, #d2d2d2 0%, #858585 55%, #3e3e3e 100%);
+    }
+
+    .project-four {
+      background:
+        linear-gradient(135deg, #ded6ca 0%, #aaa08e 55%, #665e50 100%);
+    }
+
+    /* THESIS */
+
+    .thesis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 550px;
+    }
+
+    .thesis-visual {
+      background:
+        linear-gradient(145deg, #c7c1b6, #777268);
+      min-height: 550px;
+    }
+
+    .thesis-content {
+      padding: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #ebe9e3;
+    }
+
+    .thesis-content h2 {
+      font-size: clamp(40px, 5vw, 70px);
+      line-height: 0.95;
+      letter-spacing: -3px;
+      font-weight: 500;
+    }
+
+    .thesis-content p {
+      margin-top: 30px;
+      max-width: 500px;
+      color: #555;
+      font-size: 16px;
+    }
+
+    .thesis-tag {
+      margin-top: 35px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* SKILLS */
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 50px;
+    }
+
+    .skill-group h3 {
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .skill-group p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    /* CONTACT */
+
+    .contact {
+      min-height: 65vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .contact h2 {
+      font-size: clamp(50px, 9vw, 115px);
+      line-height: 0.9;
+      letter-spacing: -6px;
+      font-weight: 500;
+    }
+
+    .contact-details {
+      margin-top: 50px;
+      display: flex;
+      gap: 35px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    .contact-details a {
+      border-bottom: 1px solid #171717;
+      padding-bottom: 4px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 30px 0;
+      font-size: 12px;
+      color: #777;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 750px) {
+
+      .nav-inner {
+        min-height: 65px;
+      }
+
+      .nav-links {
+        gap: 14px;
+        font-size: 11px;
+      }
+
+      .hero {
+        min-height: 75vh;
+      }
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .about-grid,
+      .projects,
+      .thesis,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid {
+        gap: 35px;
+      }
+
+      .project-image {
+        height: 390px;
+      }
+
+      .thesis-visual {
+        min-height: 350px;
+      }
+
+      .thesis-content {
+        padding: 45px 30px;
+      }
+
+      .contact h2 {
+        letter-spacing: -4px;
+      }
+
+      footer {
+        gap: 20px;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+    <div class="container nav-inner">
+
+      <a href="#" class="logo">
+        HEAVEN ALEMA
+      </a>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#thesis">Thesis</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <header class="hero">
+    <div class="container hero-content">
+
+      <div class="eyebrow">
+        Architecture · Design · Visualization
+      </div>
+
+      <h1>
+        Architecture that connects people, space & experience.
+      </h1>
+
+      <p class="hero-description">
+        I am Heaven Alema, an architecture graduate interested in
+        thoughtful, human-centered design, spatial organization,
+        architectural visualization and visual communication.
+      </p>
+
+      <a href="#work" class="hero-link">
+        Explore selected work ↓
+      </a>
+
+    </div>
+  </header>
+
+
+  <!-- ABOUT -->
+
+  <section id="about">
+    <div class="container">
+
+      <div class="section-label">
+        01 — About
+      </div>
+
+      <div class="about-grid">
+
+        <h2 class="about-title">
+          Designing with purpose.
+        </h2>
+
+        <div class="about-text">
+
+          <p>
+            I am an architecture graduate from the Ethiopian Institute
+            of Architecture, Building Construction and City Development
+            (EiABC), Addis Ababa University.
+          </p>
+
+          <p>
+            My approach combines spatial thinking, human-centered design,
+            architectural visualization and visual communication to create
+            spaces that are thoughtful, meaningful and responsive to people.
+          </p>
+
+          <p>
+            Alongside architecture, I am interested in graphic design,
+            entrepreneurship and sustainable product design.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SELECTED WORK -->
+
+  <section id="work">
+    <div class="container">
+
+      <div class="section-label">
+        02 — Selected Work
+      </div>
+
+      <div class="projects">
+
+        <!-- PROJECT 01 -->
+
+        <article class="project">
+
+          <div class="project-image project-one"></div>
+
+          <div style="padding-top:18px;">
+
+            <div class="project-number">
+              01
+            </div>
+
+            <h3 class="project-title">
+              Place of Belonging
+            </h3>
+
+            <p class="project-type">
+              Architecture · Thesis · Child Development & Healing
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- PROJECT 02 -->
+
+        <article class="project">
+
+          <div class="project-image project-two"></div>
+
+          <div style="padding-top:18px;">
+
+            <div class="project-number">
+              02
+            </div>
+
+            <h3 class="project-title">
+              Frondescence
+            </h3>
+
+            <p class="project-type">
+              Landscape Architecture · Playground
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- PROJECT 03 -->
+
+        <article class="project">
+
+          <div class="project-image project-three"></div>
+
+          <div style="padding-top:18px;">
+
+            <div class="project-number">
+              03
+            </div>
+
+            <h3 class="project-title">
+              The Convergence Tower
+            </h3>
+
+            <p class="project-type">
+              High-Rise Architecture · Mixed Use
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- PROJECT 04 -->
+
+        <article class="project">
+
+          <div class="project-image project-four"></div>
+
+          <div style="padding-top:18px;">
+
+            <div class="project-number">
+              04
+            </div>
+
+            <h3 class="project-title">
+              Yekatit 12 Landscape Narrative
+            </h3>
+
+            <p class="project-type">
+              Landscape · Urban Design · Spatial Narrative
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- THESIS -->
+
+  <section id="thesis" style="padding-bottom:0;">
+
+    <div class="container">
+
+      <div class="section-label">
+        03 — Featured Thesis
+      </div>
+
+    </div>
+
+    <div class="thesis">
+
+      <div class="thesis-visual"></div>
+
+      <div class="thesis-content">
+
+        <h2>
+          Place of<br>
+          Belonging
+        </h2>
+
+        <p>
+          A transitional architectural environment developed around
+          the needs of working street children, exploring how space can
+          support development, healing, learning and a sense of belonging.
+        </p>
+
+        <div class="thesis-tag">
+          Play · Learn · Heal · Belong
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SKILLS -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-label">
+        04 — Capabilities
+      </div>
+
+      <div class="skills-grid">
+
+        <div class="skill-group">
+
+          <h3>
+            Architecture
+          </h3>
+
+          <p>
+            Architectural Design<br>
+            Spatial Organization<br>
+            Site Planning<br>
+            Design Research<br>
+            Architectural Visualization
+          </p>
+
+        </div>
+
+
+        <div class="skill-group">
+
+          <h3>
+            Software
+          </h3>
+
+          <p>
+            Revit<br>
+            AutoCAD<br>
+            SketchUp<br>
+            Adobe Illustrator<br>
+            Lumion<br>
+            D5 Render
+          </p>
+
+        </div>
+
+
+        <div class="skill-group">
+
+          <h3>
+            Interests
+          </h3>
+
+          <p>
+            Architecture<br>
+            Graphic Design<br>
+            Entrepreneurship<br>
+            Sustainable Product Design
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONTACT -->
+
+  <section id="contact" class="contact">
+
+    <div class="container">
+
+      <div class="section-label">
+        05 — Contact
+      </div>
+
+      <h2>
+        Let's create<br>
+        something meaningful.
+      </h2>
+
+      <div class="contact-details">
+
+        <!-- We will replace these with your real links later -->
+
+        <a href="https://www.linkedin.com/" target="_blank">
+          LinkedIn ↗
+        </a>
+
+        <a href="https://github.com/heavenalema" target="_blank">
+          GitHub ↗
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer class="container">
+
+    <span>
+      © 2026 Heaven Alema
+    </span>
+
+    <span>
+      Architecture · Design · Research
+    </span>
+
+  </footer>
+
+</body>
+</html>
