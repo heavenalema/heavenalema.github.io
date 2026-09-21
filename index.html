@@ -156,28 +156,29 @@
     /* WORK */
 
     .projects {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 60px 35px;
-    }
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 28px;
+  row-gap: 110px;
+}
+.project {
+  cursor: pointer;
+  grid-column: span 6;
+}
 
-    .project {
-      cursor: pointer;
-    }
+   .project-image {
+  height: 560px;
+  background: #deddd8;
+  display: flex;
+  align-items: flex-end;
+  padding: 0;
+  transition: transform 0.5s ease;
+  overflow: hidden;
+}
 
-    .project-image {
-      height: 500px;
-      background: #deddd8;
-      display: flex;
-      align-items: flex-end;
-      padding: 0;
-      transition: transform 0.4s ease;
-      overflow: hidden;
-    }
-
-    .project:hover .project-image {
-      transform: scale(0.985);
-    }
+   .project:hover .project-image {
+  transform: scale(0.99);
+}
 
     .project-number {
       font-size: 12px;
@@ -208,6 +209,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.7s ease;
 }
 
     .project-two {
